@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html en ng-app="ratemycourse">
+<head>
+	<meta charset="utf-8">
+
+	<!-- lib js -->
+ 	<script type="text/javascript" src="libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="libs/angular/angular.min.js"></script>
+	<script type="text/javascript" src="libs/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular-route.js"></script> 
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	
+	<!-- lib css -->
+	<link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+	<!-- my css -->
+	<link href="styles/header.css" rel="stylesheet" />
+	<link href="styles/login.css" rel="stylesheet" />
+	<link href="styles/home.css" rel="stylesheet" />
+	<link href="styles/comment.css" rel="stylesheet" />
+	<link href="styles/profile.css" rel="stylesheet" />
+
+	<!-- my js -->
+	<script type="text/javascript" src="scripts/controller/app.js"></script>
+	<script type="text/javascript" src="scripts/controller/loginCtrl.js"></script>
+	<script type="text/javascript" src="scripts/controller/signupCtrl.js"></script>
+	<script type="text/javascript" src="scripts/controller/homeCtrl.js"></script>
+	<script type="text/javascript" src="scripts/controller/courseCtrl.js"></script>
+	<script type="text/javascript" src="scripts/controller/profileCtrl.js"></script>
+	<script type="text/javascript" src="scripts/dataService.js"></script>
+
+
+</head>
+<body>
+	<div header></div>
+	<div id=bg ng-controller=mainCtrl class="for-login">
+		<div ng-view></div>
+	</div>
+	<div footer></div>
+</body>
+</html>

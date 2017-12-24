@@ -1,0 +1,36 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.lgcontent {
+    
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 7px;
+    padding: 20px; 
+    float:right;
+    width: 500px;
+}
+
+.right-half-container {
+
+    padding: 30px
+}
+
+.container{
+    margin-top: 30px;
+}
+
+.main{
+    background-color: white;
+    padding: 20px;
+    border-radius:3px;
+}
+
+li { cursor: pointer; cursor: hand; }
+
+a:hover {
+    cursor:pointer;
+    /*color: #FF8C00;*/
+}

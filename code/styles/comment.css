@@ -1,0 +1,107 @@
+
+
+
+.course-info{
+    border-bottom: 1px solid grey;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.course-title{
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size: 250%;
+}
+.barcode{
+    white-space:pre; /* or pre-wrap if you want wrapping to still work. */
+}
+
+.course-grade {
+
+    text-align: center;
+    width: 50%;
+    float: left;
+	border-right: 1px solid grey;
+}
+
+
+
+
+.question-block {
+	padding: 5px;
+	margin-top: 10px;
+    float: left;
+}
+
+.answer-list {
+    width: 90%;
+}
+
+.answer-line {
+    width: 10%;
+    border-right: 2px solid grey;
+    left: 30px;
+    position: relative;
+}
+
+.comment-block {
+	padding: 5px;
+    float: right;
+}
+
+/**************************** post block ****************************/
+
+
+
+/**************************** show comment list ****************************/
+.post-block {
+    display: block;
+    overflow: auto;
+}
+
+
+.post-label{
+    font-size: 16px;
+}
+
+
+.cmt_div{
+    padding: 5px;
+    background-color: white;
+    width:100%;
+    height:100%;
+    border: 1px #DCDCDC solid;
+    overflow-wrap: break-word; 
+    margin-top: 5px;
+}
+
+.time_div{
+    float:right;
+    color:grey; 
+    font-weight:normal; 
+    font-size:11px
+}
+
+.post-block {
+    width: 100%;
+    height: 130px;
+    background-color: #f1f1f1;
+}
+
+.post-rate {
+    height: 100%;
+    border-right: 1px solid;
+    border-color: black;
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+
+.post-info {
+    padding: 10px;
+}
+
+/**/
+.reply_block {
+    width: 100%;
+}
+

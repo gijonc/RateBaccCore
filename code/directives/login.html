@@ -1,0 +1,28 @@
+<section ng-controller="loginCtrl" class="login-signup">
+	
+	<div class="right-half-container">
+		<div class="lgcontent">
+		  	<form ng-submit="login(credentials)" novalidate>
+		  		<div class="form-group form-group-lg">
+					<label for="username">Email</label>
+					<input type="text" id="username" ng-model="credentials.username" class="form-control" style="font-size: 24px;">
+				</div>
+				<div class="form-group form-group-lg">
+					<label for="password">Password</label>
+					<input type="password" id="password" ng-model="credentials.password" class="form-control" style="font-size: 28px;">
+					<p ng-if="input_error" class="text-center" style="color: red">Incorrect password or email
+				</p>
+				</div>
+				
+				<br>
+				<input type="submit" value="LOGIN" ng-disabled="isDisabled" ng-click="login()" class="btn btn-warning btn-block btn-lg" style="background-color: #FF8C00">
+				<br>
+				
+				<br>
+				<p style="text-align: center;">Dont' have account yet? Sign-up <a ng-href="#/signup">here</a></p>
+		  	</form>
+		</div>
+	</div>
+</section>
+
+

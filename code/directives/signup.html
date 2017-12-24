@@ -1,0 +1,42 @@
+
+<section ng-controller="signupCtrl" class="login-signup">
+	<div ng-if="signedup" class="alert alert-success text-center" role="alert">
+	  	<strong>You have signed-up sucessfully! Click <a ng-href="#/login">here</a> to login</strong>
+	</div>
+
+	<div class=right-half-container>
+		<div class="lgcontent">
+			<form>
+				<h2>Sign-up</h2>
+
+				<div class="form-group form-group-lg">
+					<label for="email">Email Address</label>
+					<input type="email" id="email" ng-model="email" class="form-control" placeholder="email@example.com" style="font-size: 24px;">
+				</div>
+
+				<div class="form-group form-group-lg" style="width: 50%">
+					<label for="usertype">Role</label>
+						<select class="form-control " ng-model="role.model">
+						<option ng-repeat="option in role.options" value="{{option}}">{{option}}
+						</option>
+						</select>
+				</div>
+
+				<div class="form-group form-group-lg">
+					<label for="password">Password</label>
+					<input type="password" id="password" ng-model="password" class="form-control" style="font-size: 26px;">
+					<small class="form-text text-muted">At least be 6 characters</small>
+				</div>
+
+				<div class="form-group form-group-lg">
+					<label for="re_password">Confirm Password</label>
+					<input type="password" id="re_password" ng-model="re_password" class="form-control" style="font-size: 26px;">
+				</div>
+				<br>
+				<input type="submit" value="SUBMIT" ng-click="signup()" class="btn btn-success btn-block btn-lg">
+				<br>
+				<p style="text-align: center;">Already have account? Login <a href="#/">here</a></p>
+			</form>
+		</div>
+	</div>	
+</section>

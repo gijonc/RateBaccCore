@@ -1,0 +1,321 @@
+<section ng-controller="courseCtrl" ng-init="load()" class="container">
+	<div id="success_alert" class="alert alert-success text-center alertBar" role="alert">
+	  	<strong id="success_alert_text"></strong>
+	</div>
+	<div id="fail_alert" class="alert alert-danger text-center" role="alert">
+	  	<strong id="fail_alert_text"></strong>
+	</div>
+
+	<!-- COURSE INFO -->
+
+	<div class="row content">
+		<div class="course-title col-md-12">
+		<p class="text-left">{{ course.c_code }} {{course.c_num}} - {{ course.name }}</p>
+		</div>
+		<div id="course-info-block" class="col-md-6 main" style="margin-top: 5px"> 
+			<div class="course-info">
+				<p style="font-size: 14px">{{ course.desc }} </p>
+				<p><a data-ng-click="getDetail(course.c_code,course.c_num)"><i>More detail here <span class="glyphicon glyphicon-share-alt"></span></i></a></p>
+		    	<p>
+		    		<span class="barcode" style="color: grey; font-size: 14px">Category:  </span>
+		    		<span style="font-size: 20px">{{ course.category }}</span>
+		    	</p>
+		    	<p>
+		    		<span class="barcode" style="color: grey; font-size: 14px">Credit:  </span>
+		    		<span style="font-size: 20px">{{ course.credit }}</span>
+		    	</p>
+		    	
+		    </div>
+
+			<div style="margin-top: 10px">
+				<div class="course-grade">
+			    	<p style="color: grey; font-size: 26px;">Overall Score</p>
+			    	<p> <span style="font-size: 64px; color:#ff6a00">{{ course.recLv }}</span><span style="font-size: 32px; color: grey;">/10</span></p>
+			    	<p></p>
+			    </div>
+
+			    <div class="course-grade" style="border:none;">
+			    	<p style="color: grey; font-size: 26px;">Difficulty</p>
+			    	<p> <span style="font-size: 64px;">{{ course.diff }}</span><span style="font-size: 32px; color: grey;">/10</span><span style="font-size: 16px;"> {{getDiff(course.diff)}}</span></p>
+			    	
+			    </div>
+			</div>
+		</div>
+
+
+		<!-- COMMENT BLOCK -->
+
+	    <div class="comment-block col-md-6">
+			<div id="post-input" class="panel panel-info" ng-if="not_post_before == true">
+
+
+	    		<div class="panel-heading" style="font-size: 120%"><b>Your comment for</b> <i>{{ course.c_code }} {{course.c_num}}</i> 
+	    		</div>
+
+	  			<div class="panel-body" >
+	    			<form >
+						<div class="form-group row">
+							<div class="col-md-3">
+								<label for="repeatSelect"> Term you took </label>
+								<select class="form-control" ng-model="post_term.model">
+									<option ng-repeat="option in post_term.options" value="{{option}}">{{option}}
+									</option>
+								</select>
+	    					</div>
+
+	    					<div class="col-md-3">
+								<label for="repeatSelect"> Year you took</label>
+								<select class="form-control" ng-model="post_year.model">
+									<option ng-repeat="option in post_year.options" value="{{option}}">{{option}}
+									</option>
+								</select>
+	    					</div>
+						</div>		
+	    				<br>
+						<div class="form-group">
+							<label>Difficulty</label>
+							<br>
+							<label ng-repeat="d in post_diff.options" style="width: 20%">
+								<input type="radio" ng-model="post_diff.model" ng-value="d.value" /> {{d.name}}
+							</label>
+
+						</div>
+						<br>
+						<div class="form-group">
+							<label>Overall Score</label>
+							<br>
+							<label ng-repeat="d in post_score.options" style="width: 10%; font-size: 120%;">
+								<input type="radio" ng-model="post_score.model" ng-value="d" /> {{d}}
+								</label>
+
+						</div>
+						<br>
+
+
+						<div class="form-group">
+							<label for="post_instr">Instructor</label>
+							<input type="text" id="Instructor" ng-model="post_instr.model" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label for="post_text">Comment</label>
+							<textarea id="post_text" class="form-control" rows="3" ng-model="post_text.model"></textarea>
+						</div>
+						<div class="text-center">
+							<input type="submit" value="Save" ng-click="comment_post_btn()" class="btn btn-primary">
+						</div>
+
+					</form>
+	  			</div>
+			</div>
+	    	
+			<!-- COMMENT LIST -->
+
+	    	<div id="comment-list" data-ng-repeat="c in commentList" class="panel-group">
+	    		<div class="panel panel-default" id="msg{{c.cmID}}">
+		    		
+
+
+	    			<div class="panel-heading" style="height: 42px; background-color: grey">
+
+	    				<div class="post-label col-md-8 text-left" style="color: white;"><span class="glyphicon glyphicon-user" data-ng-if="userPostHandle(c.uID)"></span> {{ c.uEmail }} ( {{c.cmTermTook}} {{c.cmYearTook}} ) </div>
+	    				<div class="dropdown text-right">
+						  	<a type="button" data-toggle="dropdown" ng-if="userPostHandle(c.uID)">
+						  		<span style="color: white;" class="glyphicon glyphicon-menu-down"></span>
+						  	</a>
+
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li><a data-ng-click="edit_btn()" data-toggle="modal" data-target="#commentModal">Edit</a></li>
+								<li><a data-ng-click="del_btn()">Delete</a></li>
+							</ul>
+						</div>
+		    			
+	    			</div>
+	    			<div class="post-block">
+	    				<div class="post-rate col-md-2">
+					    	<p class="post-label" ">Overall</p>
+					    	<p><span style="font-size: 44px; color:#ff6a00">{{ c.cmRecLv }}</span><span style="font-size: 12px;">/10</span></p>
+					    	<p></p>
+	    				</div>
+
+	    				<div class="post-rate col-md-2">
+							<p class="post-label">Difficulty</p>
+					    	<p><span style="font-size: 44px; color:#ff6a00">{{ c.cmDiff }}</span><span style="font-size: 12px;">/10</span></p>
+					    	<p></p>
+	    				</div>
+
+    					<div class="post-info col-md-8">
+    						
+		    				<div class="post-label">Instructor: 
+		    				<span style="color: #ff6a00">{{ c.cmInst }}</span>
+		    				</div>
+			    			
+			    			<div class='cmt_div' ng-show="c.cmText"> 
+			    			<span class="glyphicon glyphicon-comment"></span> {{ c.cmText }}</div>
+			    			
+
+    					</div>
+
+    				<!-- COMMENT MODAL -->
+						<div class="modal" id="commentModal" role="dialog">
+							<div class="modal-dialog">
+							  	<!-- Modal content-->
+							  	<div class="modal-content">
+							    	<div class="modal-body">
+							      		<form >
+											<div class="form-group row">
+												<div class="col-md-3">
+													<label for="repeatSelect"> Term you took </label>
+													<select class="form-control" ng-model="post_term.model">
+														<option ng-repeat="option in post_term.options" value="{{option}}">{{option}}
+														</option>
+													</select>
+						    					</div>
+
+						    					<div class="col-md-3">
+													<label for="repeatSelect"> Year you took</label>
+													<select class="form-control" ng-model="post_year.model">
+														<option ng-repeat="option in post_year.options" value="{{option}}">{{option}}
+														</option>
+													</select>
+						    					</div>
+											</div>		
+						    				<br>
+											<div class="form-group">
+												<label>Difficulty</label>
+												<br>
+												<label ng-repeat="d in post_diff.options" style="width: 20%">
+													<input type="radio" ng-model="post_diff.model" ng-value="d.value" /> {{d.name}}
+												</label>
+
+											</div>
+											<br>
+											<div class="form-group">
+												<label>Overall Score</label>
+												<br>
+												<label ng-repeat="d in post_score.options" style="width: 10%; font-size: 120%;">
+													<input type="radio" ng-model="post_score.model" ng-value="d" /> {{d}}
+													</label>
+
+											</div>
+											<br>
+
+
+											<div class="form-group">
+												<label for="post_instr">Instructor</label>
+												<input type="text" id="Instructor" ng-model="post_instr.model" class="form-control">
+											</div>
+
+											<div class="form-group">
+												<label for="post_text">Comment</label>
+												<textarea class="form-control" rows="3" ng-model="post_text.model"></textarea>
+											</div>
+											<div class="text-right">
+												<input type="submit" value="Save" ng-click="update_post()" class="btn btn-primary">
+											</div>
+
+										</form>
+							    	</div>
+							  	</div>
+							</div>
+						</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+
+
+	    <!-- QUESTION BLOCK -->
+
+
+	    <div class="question-block col-md-6">
+
+	    <!-- QUESTION POST BLOCK -->
+			<div id="post-input" class="panel panel-default">
+
+	    		<div class="panel-heading" style="font-size: 110%; height: 35px; background-color: #FF8C00"><b>Your question for</b> <i>{{ course.c_code }} {{course.c_num}}</i> 
+	    		</div>
+
+	  			<div class="panel-body" >
+	    			<form >
+
+						<div class="form-group">
+							<textarea class="form-control" rows="1" ng-model="question_text" placeholder="put your question here..."></textarea>
+						</div>
+						<div class="text-center">
+							<input type="submit" value="Save" ng-click="question_post_btn()" class="btn btn-warning btn-sm pull-right">
+						</div>
+					</form>
+	  			</div>
+			</div>
+
+			<!-- QUESTION LIST -->
+			<div id="question-list" data-ng-repeat="q in questionList" class="panel-group">
+    			<div class="panel panel-default" id="ques{{q.qId}}">
+    				<div class="panel-heading" style="height: 25px; background-color: #FF8C00">
+    					<div style="color: white; bottom: 7px; position: relative;">
+								<span class="glyphicon glyphicon-user" data-ng-if="userPostHandle(q.qUid)" "></span>
+								<span >{{ q.qUser }} </span> 
+		    				
+			    				<div class="dropdown" style="float:right;">
+								  	<a type="button" data-toggle="dropdown" ng-if="userPostHandle(q.qUid)">
+								  		<span style="color: white;" class="glyphicon glyphicon-menu-down"></span>
+								  	</a>
+
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li><a data-ng-click="ques_del_btn(q.qId)">Delete</a></li>
+									</ul>
+								</div>
+							</div>
+    				</div>
+
+    				<div class="panel-body">
+  						<div style="width: 100%; height: 50px; border-bottom: 1px solid #f1f1f1">{{q.qText}}</div>
+							<div class="time_div"><span class="glyphicon glyphicon-time"></span> {{q.qTime}} </div>
+
+							<div class="reply_block">
+    					
+								<div class="form-group">
+									<textarea class="form-control reply-area" rows="1" ng-model="answer_text" placeholder="Reply here ..."></textarea>
+								</div>
+								<div class="text-center">
+									<input type="submit" value="submit" ng-click="answer_post_btn(q.qId,answer_text)" class="btn btn-primary btn-sm pull-right">
+								</div>
+							</div>
+
+  						<div class="text-center">
+  							<a class="btn btn-defalut btn-sm" data-toggle="collapse" data-target="#reply_text{{q.qId}}">{{q.replyNum}} replies <span class="glyphicon glyphicon-triangle-bottom"></span> </a>
+  						</div>
+    				</div>
+
+    			</div>
+
+
+					<!-- ANSWER LIST -->
+					<div id="reply_text{{q.qId}}" class="collapse">
+						<div data-ng-repeat="a in q.answer" class="answer-list">
+		    			<div class="panel panel-default " id="ans{{a.aId}}" style="margin-top: 5px">
+		    				<div class="panel-heading" style="height: 25px;"">
+		    					<div style="bottom: 7px; position: relative;">
+										<span >{{ a.aUser }} </span> 
+									</div>
+		    				</div>
+		    				<div class="panel-body" style="background-color: transparent;">
+		    					<div style="width: 100%; height: 50px; border-bottom: 1px solid #f1f1f1">{{a.aText}}</div>
+		    					<div class="time_div"><span class="glyphicon glyphicon-time"></span> {{a.aTime}} </div>
+		    				</div>
+		    			</div>
+						</div>
+					</div>
+
+    		</div>
+
+
+
+
+
+
+		</div>
+	</div>
+
+</section>

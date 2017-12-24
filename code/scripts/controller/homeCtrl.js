@@ -1,0 +1,59 @@
+/*
+	controller functions for login page
+*/
+
+var app = angular.module('ratemycourse');
+
+app.controller('homeCtrl',['$scope','$http', function($scope,$http){
+	$scope.courses = '';
+	$scope.result = '';
+
+	var URL = 'php/listCourse';
+
+  	$scope.load = function(){
+  		$scope.loading = true;
+  		$http({
+			method: 'POST',
+			url: URL,
+			data: {id: 'all'}
+
+		}).then(function (response) {
+			// console.log(response.data);
+			$scope.courses = response.data;
+
+			
+		}, function (response) {
+			// on error
+			console.log(response.data,response.status);
+		});
+  	}
+  	$scope.search = function(n){
+  		// Declare variables 
+  		var input, filter, table, tr, td, i;
+  		input = document.getElementById("myInput");
+  		filter = input.value.toUpperCase();
+  		table = document.getElementById("myTable");
+  		tr = table.getElementsByTagName("tr");
+
+  		// Loop through all table rows, and hide those who don't match the search query
+  		for (i = 0; i < tr.length; i++) {
+    		td0 = tr[i].getElementsByTagName("td")[0];
+    		td1 = tr[i].getElementsByTagName("td")[1];
+    		if (td0 || td1) {
+      			if (td0.innerHTML.toUpperCase().indexOf(filter) > -1 || td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        			tr[i].style.display = "";
+      			} else {
+        			tr[i].style.display = "none";
+      			}
+    		}
+  		}
+  	}
+
+
+  	$scope.gotoCourse = function(courseId){
+  		window.location = '#/course/' + courseId;
+  	}
+
+}]);
+
+

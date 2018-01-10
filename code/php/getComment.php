@@ -1,4 +1,3 @@
-<!-- getComment -->
 
 
 <?php 
@@ -43,7 +42,7 @@
 			mysqli_free_result($result);
 		}
 	}
-
+    header('Content-type:application/json;charset=utf-8');
 	$json = json_encode($comment);
 	echo $json;
 

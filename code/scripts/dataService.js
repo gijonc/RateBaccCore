@@ -2,15 +2,15 @@ var app = angular.module('ratemycourse');
 
 app.factory('authService', function ($http) {
 	var authService = {};
+	//var root = window.location.host + "/RateBaccCore/code/";
 
 	authService.login = function (credentials) {
-		var URL = 'php/login';
+		var URL = 'php/login.php';
 
 		return $http
 			.post(URL, credentials)
 			.then(function (respond) {
 				var user = respond.data;
-
 				if(typeof user === 'object'){
 					return user;
 				}

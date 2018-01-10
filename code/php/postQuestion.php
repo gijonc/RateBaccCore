@@ -1,6 +1,3 @@
-<!-- postQuestion -->
-
-
 
 <?php
     require_once 'config.php';

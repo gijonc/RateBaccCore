@@ -1,5 +1,3 @@
-<!-- updateProfile -->
-
 
 <?php
     // connect database

@@ -8,7 +8,7 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
 	$scope.courses = '';
 	$scope.result = '';
 
-	var URL = 'php/listCourse';
+	var URL = 'php/listCourse.php';
 
   	$scope.load = function(){
   		$scope.loading = true;

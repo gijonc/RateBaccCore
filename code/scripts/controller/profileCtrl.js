@@ -53,7 +53,7 @@ app.controller('profileCtrl', function($scope,$http,dataService){
 
 
   	function update(data){
-	    var _URL = 'php/updateProfile';
+	    var _URL = 'php/updateProfile.php';
 		var r = '';
 		dataService.async(_URL,data).then(function(d){
 			if (d == 1)

@@ -60,7 +60,7 @@ app.controller('signupCtrl', function($scope,$http, dataService){
 
   // check exist values in sql
 	function postDATA(data){
-    var _URL = 'php/signup';
+    var _URL = 'php/signup.php';
 
     dataService.async(_URL,data).then(function(d){
       if(d == 0){

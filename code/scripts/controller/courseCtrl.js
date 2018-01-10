@@ -75,7 +75,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 		if(checkValidPost(rawDATA)){
 			var request = $http({
 				method: 'POST',
-				url: 'php/postComment',
+				url: 'php/postComment.php',
 				data: rawDATA,
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			});
@@ -131,7 +131,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 	}
 
 	var loadCourseInfo = function(cid){
-		var _URL = 'php/listCourse';
+		var _URL = 'php/listCourse.php';
 		var _DATA = {id: cid};
 		var r = '';
 		dataService.async(_URL,_DATA).then(function(d){
@@ -145,7 +145,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 				COMMENT LIST FUNCTIONS
 --------------------------------------------------*/
 	var loadComment = function(cid){
-		var _URL = 'php/getComment';
+		var _URL = 'php/getComment.php';
 		var _DATA = {id: cid};
 		dataService.async(_URL,_DATA).then(function(d){
 			$scope.commentList = d;
@@ -177,7 +177,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 	}
 
 	$scope.update_post = function(cmId){
-		var _URL = 'php/updateComment';
+		var _URL = 'php/updateComment.php';
 
 		var _DATA = {
 			action: 'edit',
@@ -205,7 +205,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 	}
 
 	$scope.del_btn = function(){
-		var _URL = 'php/updateComment';
+		var _URL = 'php/updateComment.php';
 		var _DATA = {comment_id: self.commentID, action:'delete'};
 		dataService.async(_URL,_DATA).then(function(d){
 			if (d === '1'){
@@ -232,7 +232,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 				QUESTION LIST FUNCTIONS
 --------------------------------------------------*/
 	var loadQuestion = function(cid){
-		var _URL = 'php/getQuestion';
+		var _URL = 'php/getQuestion.php';
 		var _DATA = {cId: cid, action: 'question'};
 
 		dataService.async(_URL,_DATA).then(function(q){
@@ -250,7 +250,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 
 	$scope.question_text = '';
 	$scope.question_post_btn = function(){
-		var _URL = 'php/postQuestion';
+		var _URL = 'php/postQuestion.php';
 
 		var rawDATA = {
 			action: 'post',
@@ -280,7 +280,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 	}
 
 	$scope.ques_del_btn = function(qId){
-		var _URL = 'php/postQuestion';
+		var _URL = 'php/postQuestion.php';
 		var _DATA = {question_id: qId, action:'delete'};
 
 		dataService.async(_URL,_DATA).then(function(d){

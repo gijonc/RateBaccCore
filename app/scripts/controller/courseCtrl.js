@@ -301,7 +301,7 @@ app.controller('courseCtrl', function($scope, $http, $routeParams, dataService){
 	}
 
 	$scope.answer_post_btn = function(qid,a){
-		var _URL = 'php/postAnswer';
+		var _URL = 'php/postAnswer.php';
 
 		var rawDATA = {
 			action: 		"post",

@@ -8,19 +8,22 @@ app.controller('homeCtrl',['$scope','$http', function($scope,$http){
 	$scope.courses = '';
 	$scope.result = '';
 
-	var URL = 'php/listCourse.php';
+	const BASE_URL = 'http://localhost:8000/';
+	const DATA_DIR = 'rateMyBaccCore/api/public/';
+
 
   	$scope.load = function(){
+		var TABLE = "COURSE";
+		var route = "courses/";
+		const _URL = BASE_URL + DATA_DIR + route;
+
   		$scope.loading = true;
   		$http({
-			method: 'POST',
-			url: URL,
-			data: {id: 'all'}
+			method: 'GET',
+			url: _URL,
 
 		}).then(function (response) {
-			// console.log(response.data);
-			$scope.courses = response.data;
-
+			$scope.courses = response.data[TABLE];
 			
 		}, function (response) {
 			// on error

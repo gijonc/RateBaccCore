@@ -16,12 +16,11 @@
 				      	</tr>
 				    </thead>
 				    <tbody>
-				    	<tr ng-repeat="course in courses" class="table-content">
-					    	<td><a ng-click=gotoCourse(course.id)>{{ course.c_code }} {{course.c_num}}</a></td>
-					    	<td>{{ course.name }}</td>
+				    	<tr ng-repeat="course in courses" class="table-content" ng-click=gotoCourse(course.cID)>
+					    	<td>{{ course.cID }}</td>
+					    	<td>{{ course.cName }}</td>
 					    	<td>{{ course.diff }}</td>
-					    	<td style="color: #FF8C00"><b>{{ course.recLv}}</b></td>
-
+							<td style="color: #FF8C00"><b>{{ course.RecLv}}</b></td>
 						</tr>
 				    </tbody>
 				</table>
